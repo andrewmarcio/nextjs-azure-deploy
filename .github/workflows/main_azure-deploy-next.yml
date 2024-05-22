@@ -44,6 +44,9 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
+      contents: read
+    env: 
+      ARM_USE_OIDC: true
 
     steps:
       - name: Download artifact from build job
