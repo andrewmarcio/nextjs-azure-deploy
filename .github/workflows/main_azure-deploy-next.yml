@@ -60,5 +60,5 @@ jobs:
         with:
           app-name: 'azure-deploy-next'
           slot-name: 'Production'
-          package: .
+          package: 'standalone'
           
