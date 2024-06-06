@@ -23,14 +23,18 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          yarn
-          yarn build
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: nextjs-build
-          path: .next
+          name: node-app
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -38,21 +42,15 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: nextjs-build
-      
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F67CC9C22EA54AA58D58014B6B3C9188 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E7BCC495ADC34F85B537B753333D4025 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_59E0E9E9203A4F37B8F95315CBE54700 }}
+          name: node-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -60,5 +58,5 @@ jobs:
         with:
           app-name: 'azure-deploy-next'
           slot-name: 'Production'
-          package: 'standalone'
-          
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6DDFD78337054D37ABCAC568C1361C29 }}
+          package: .
