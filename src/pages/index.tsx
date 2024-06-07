@@ -17,7 +17,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
           <p>
-            Get started by editing&nbsp;
+            Get started by editing&nbsp; {process.env.NEXT_PUBLIC_APP_NAME || 'Sem Variável de ambiente'}
             <code className={styles.code}>src/pages/index.tsx</code>
           </p>
           <div>
