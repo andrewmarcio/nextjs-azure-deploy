@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { Avatar, Box } from "@mui/material";
-import { Container } from "./styles";
+import { Avatar } from "@mui/material";
+import { Container } from "./_styles";
 
 const inter = Inter({ subsets: ["latin"] });
 

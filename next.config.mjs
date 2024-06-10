@@ -4,6 +4,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  pageExtensions: ['mdx', 'tsx', 'jsx'],
 };
 
 export default nextConfig;
