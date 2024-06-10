@@ -28,9 +28,10 @@ jobs:
           npm install
           npm run build --if-present
       - name: Copy build folder to deploy
-          run: cp -r .next ./deploy
+        run: |
+            cp -r .next ./deploy
       - name: Install Next to deploy folder
-          run: |
+        run: |
             cd ./deploy
             npm install
 
