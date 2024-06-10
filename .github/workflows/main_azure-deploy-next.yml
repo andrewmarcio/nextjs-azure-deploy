@@ -42,4 +42,4 @@ jobs:
           app-name: 'azure-deploy-next'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DA112CA4ADCB4E8DAED437E0E31716FC }}
-          package: .
+          package: './deploy'
