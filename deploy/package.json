@@ -1,0 +1,10 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "module": "true",
+  "description": "folder only used in deploy",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^14.2.3"
+  }
+}
